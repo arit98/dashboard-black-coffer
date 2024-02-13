@@ -53,11 +53,41 @@ const DonutChart = ({ data }) => {
                 .attr("x", 0)
                 .attr("y", "0.7em")
                 .attr("fill-opacity", 0.7)
-                .text(d => d.data.intensity))
+                )
+
+        const legendData = Array.from(new Set(data.map(d => d.topic))).map(topic => {
+            return { topic: topic };
+        });
+
+        const legend = d3.select("#legend-donut")
+            .attr("font-family", "sans-serif")
+            .attr("font-size", 12)
+            .attr("height", legendData.length * 24);
+
+        const legendItems = legend.selectAll(".legend-item")
+            .data(legendData)
+            .enter()
+            .append("g")
+            .attr("class", "legend-item")
+            .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+
+        legendItems.append("rect")
+            .attr("x", 0)
+            .attr("width", 12)
+            .attr("height", 12)
+            .attr("fill", d => color(d.topic));
+
+        legendItems.append("text")
+            .attr("x", 20)
+            .attr("y", 10)
+            .text(d => d.topic);
     }, [data]);
 
     return (
-        <svg className='w-[25rem] p-4 bg-cardOverlay backdrop-blur-md drop-shadow-lg rounded-xl' id='donut'></svg>
+        <div className='flex w-full h-[25rem] bg-cardOverlay backdrop-blur-md drop-shadow-lg rounded-xl p-4'>
+            <svg id='donut' className='w-[70rem]'></svg>
+            <svg className="p-4" id="legend-donut"></svg>
+        </div>
     )
 }
 

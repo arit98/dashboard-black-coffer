@@ -1,9 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NavBar from './components/NavBar';
 import Dashboard from './pages/Dashboard';
-import SideBar from './components/SideBar';
-import { useState } from 'react';
-import { FaBars } from 'react-icons/fa';
 
 const App = () => {
   return (

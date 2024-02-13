@@ -5,7 +5,6 @@ const AreaChart = ({ data }) => {
     const svgRef = useRef();
 
     useEffect(() => {
-        // Format date to match 'January, 20 2017 03:51:25'
         const parseDate = d3.timeParse('%B, %d %Y %H:%M:%S');
         data.forEach(d => {
             d.added = parseDate(d.added);
@@ -50,7 +49,7 @@ const AreaChart = ({ data }) => {
         svg.append('g')
             .call(d3.axisLeft(yScale));
 
-        // Legends
+
         const legends = svg.append('g')
             .attr('transform', `translate(${width - 120},${margin.top})`);
 
@@ -71,7 +70,7 @@ const AreaChart = ({ data }) => {
     }, [data]);
 
     return (
-        <svg className='h-[25rem] w-[39rem] font-extralight bg-cardOverlay backdrop-blur-md drop-shadow-lg rounded-xl' ref={svgRef}></svg>
+        <svg className='h-[25rem] w-full font-extralight bg-cardOverlay backdrop-blur-md drop-shadow-lg rounded-xl' ref={svgRef}></svg>
     );
 };
 
